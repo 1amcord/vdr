@@ -40,16 +40,6 @@ my $feed = XML::Atom::SimpleFeed->new(
 # obtain the modification time of each found.
 my %file2time;
 
-print STDOUT "Searching in $dir2\n";
-find sub {
-
-  -f or return;
-  /\.ts$/ or return;
-
-  $file2time{$File::Find::name} = (stat)[9];
-
-}, $dir2;
-
 print STDOUT "Searching in $dir1\n";
 find sub {
 
@@ -103,7 +93,7 @@ foreach (@filenames) {
     updated  => format_date_time( $file2time{$filename} ),
     category => 'Video',
   );
-  close DATA;
+#  close DATA;
 }
 
 print STDOUT "Finished cutting...\n";
